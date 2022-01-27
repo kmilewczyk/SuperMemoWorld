@@ -1,5 +1,19 @@
-import { APP_BOOTSTRAP_LISTENER, Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  APP_BOOTSTRAP_LISTENER,
+  Component,
+  ElementRef,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '@app/core/auth-service/auth.service';
 import { LoginError } from '@app/shared/models/login-error.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -7,7 +21,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   modalRef?: BsModalRef;
@@ -17,27 +31,39 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-    stayLoggedIn: [false]
-  })
+    stayLoggedIn: [false],
+  });
 
-  get email() { return this.loginForm.get('email'); }
-
-  get password() { return this.loginForm.get('password'); }
-
-  constructor(private auth: AuthService, private fb: FormBuilder, private modalService: BsModalService) { }
-
-  ngOnInit(): void {
+  get email() {
+    return this.loginForm.get('email');
   }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
+
+  constructor(
+    private auth: AuthService,
+    private fb: FormBuilder,
+    private modalService: BsModalService,
+    private router: Router,
+  ) {}
+
+  ngOnInit(): void {}
 
   onSubmit() {
     const form = this.loginForm.value;
-    this.auth.logIn(form.email, form.password, form.stayLoggedIn).subscribe(() => {
-      console.log("User logged in");
-    }, (error: LoginError) => {
-      console.log(error);
-      this.modalErrorMessage = error.message;
-      this.openModal()
-    });
+    this.auth.logIn(form.email, form.password, form.stayLoggedIn).subscribe(
+      () => {
+        console.log('User logged in');
+        this.router.navigate(['products']);
+      },
+      (error: LoginError) => {
+        console.log(error);
+        this.modalErrorMessage = error.message;
+        this.openModal();
+      }
+    );
   }
 
   openModal() {

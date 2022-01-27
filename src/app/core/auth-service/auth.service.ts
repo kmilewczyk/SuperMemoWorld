@@ -24,6 +24,10 @@ export class AuthService {
     return this.userSubject.asObservable();
   }
 
+  public get loggedIn(): boolean {
+    return this.userSubject.value !== undefined;
+  }
+
   constructor(private http: HttpClient) {}
 
   public logIn(
