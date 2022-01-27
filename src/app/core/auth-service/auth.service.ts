@@ -28,7 +28,9 @@ export class AuthService {
     return this.userSubject.value !== undefined;
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.loadUser();
+  }
 
   public logIn(
     email: string,
@@ -48,7 +50,6 @@ export class AuthService {
           !loginResponse.name.firstname ||
           !loginResponse.name.lastname
         ) {
-          console.log('Brakuje danych');
           throw new LoginError(ErrorType.HttpError, 'Coś poszło nie tak.');
         }
 
@@ -71,6 +72,7 @@ export class AuthService {
         this.userSubject.next(user);
 
         if (stayLoggedIn) {
+          this.saveUser(user);
         }
 
         return user;
@@ -78,11 +80,17 @@ export class AuthService {
     );
   }
 
+  public logOut() {
+    this.userSubject.next(undefined);
+    this.clearUser();
+  }
+
   private saveUser(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
   }
 
-  public loadUser(): boolean {
+  private loadUser(): boolean {
+    debugger;
     let localStorageUser = localStorage.getItem('user');
     if (!localStorageUser) {
       return false;
@@ -90,12 +98,11 @@ export class AuthService {
 
     let parsedUser = JSON.parse(localStorageUser);
 
-    if (parsedUser instanceof User) {
-      this.userSubject.next(parsedUser);
+    this.userSubject.next(parsedUser);
+    return true;
+  }
 
-      return true;
-    }
-
-    return false;
+  private clearUser() {
+    localStorage.removeItem('user');
   }
 }

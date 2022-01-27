@@ -55,7 +55,6 @@ export class LoginComponent implements OnInit {
     const form = this.loginForm.value;
     this.auth.logIn(form.email, form.password, form.stayLoggedIn).subscribe(
       () => {
-        console.log('User logged in');
         this.router.navigate(['products']);
       },
       (error: LoginError) => {
