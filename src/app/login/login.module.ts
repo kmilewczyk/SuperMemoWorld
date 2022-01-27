@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MockRequestsInterceptor } from '@app/core/mock-requests.interceptor';
 
 @NgModule({
-  declarations: [
-    LoginComponent
-  ],
+  declarations: [LoginComponent],
   imports: [
     CommonModule,
-    LoginRoutingModule
-  ]
+    LoginRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ModalModule.forRoot(),
+  ],
 })
-export class LoginModule { }
+export class LoginModule {}
