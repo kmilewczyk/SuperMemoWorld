@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/core/auth-service/auth.service';
+import { UserPreferencesService } from '@app/core/user-preferences/user-preferences.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
   get user$() {
@@ -16,12 +17,24 @@ export class HeaderComponent implements OnInit {
     return this.auth.loggedIn;
   }
 
-  constructor(private auth: AuthService, private router: Router) { }
+  get offlineMode$() {
+    return this.userPrefs.offlineMode$;
+  }
 
-  ngOnInit(): void { }
+  constructor(
+    private auth: AuthService,
+    private userPrefs: UserPreferencesService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {}
 
   onLogOut() {
     this.auth.logOut();
     this.router.navigate(['/']);
+  }
+
+  offlineModeToggle() {
+    this.userPrefs.toggleOfflineMode();
   }
 }

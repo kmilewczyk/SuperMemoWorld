@@ -1,1 +1,23 @@
-<p>products works!</p>
+<div class="row">
+    <div class="col-lg-10 mx-auto text-center">
+        <h1 style="font-weight: bold;" class="display-3 text-primary mb-4 bg-light">Przejrzyj naszą ofertę!</h1>
+    </div>
+
+    <div style="position: relative; min-height: 550px; background-color: rgba(150, 150, 150, 0.1);"
+        class="px-5 py-2 card bg-dark text-white col-md-6 mx-auto">
+        <app-overlay *ngIf="productLoading"></app-overlay>
+        <carousel [hidden]="productLoading" (activeSlideChange)="onSlideChange($event)" [interval]="0" class="p-0">
+            <slide *ngFor="let product of productOverview">
+                <img *ngIf="productDetail[product.id]" src="{{ productDetail[product.id]?.image }}" alt="first slide"
+                    class="border card-img-top img-fluid">
+            </slide>
+        </carousel>
+        <div class="card-body">
+            <div *ngIf="activeProductId">
+                <h2 class="card-title">{{ productDetail[activeProductId]?.title }}</h2>
+                <p class="card-text">{{ productDetail[activeProductId]?.description }}</p>
+            </div>
+        </div>
+    </div>
+
+</div>

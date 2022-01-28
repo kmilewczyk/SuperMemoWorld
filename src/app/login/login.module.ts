@@ -7,11 +7,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MockRequestsInterceptor } from '@app/core/mock-requests.interceptor';
+import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
   declarations: [LoginComponent],
   imports: [
     CommonModule,
+    SharedModule,
     LoginRoutingModule,
     FormsModule,
     ReactiveFormsModule,

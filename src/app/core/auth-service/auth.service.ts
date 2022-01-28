@@ -10,6 +10,7 @@ import {
   Observable,
   Subject,
   tap,
+  timeout,
 } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -38,6 +39,7 @@ export class AuthService {
     stayLoggedIn: boolean
   ): Observable<User> {
     return this.http.get<any>(this.baseUrl + '1').pipe(
+      timeout(8000),
       catchError((error) => {
         throw new LoginError(ErrorType.HttpError, 'Coś poszło nie tak.');
       }),
@@ -90,7 +92,6 @@ export class AuthService {
   }
 
   private loadUser(): boolean {
-    debugger;
     let localStorageUser = localStorage.getItem('user');
     if (!localStorageUser) {
       return false;

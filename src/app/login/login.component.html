@@ -5,14 +5,13 @@
     </div>
 </div>
 <div class="row justify-content-center">
-    <div class="col-sm-6 border py-4 px-4">
+    <div style="position: relative;" class="col-sm-6 border py-4 px-4">
+        <app-overlay *ngIf="loginInProcess"></app-overlay>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="mb-3">
                 <label for="inputEmail" class="form-label" email>Adres Email</label>
-                <input type="email" formControlName="email"
-                    [class.is-invalid]="invalid(email)"
-                    [class.is-valid]="valid(email)" class="form-control"
-                    id="inputEmail" aria-describedby="emailHelp">
+                <input type="email" formControlName="email" [class.is-invalid]="invalid(email)"
+                    [class.is-valid]="valid(email)" class="form-control" id="inputEmail" aria-describedby="emailHelp">
                 <div *ngIf="email.errors?.['required']" class="invalid-feedback d-block">
                     Pole nie może być puste.
                 </div>
@@ -22,10 +21,8 @@
             </div>
             <div class="mb-3">
                 <label for="inputPassword" class="form-label">Hasło</label>
-                <input type="password" formControlName="password"
-                    [class.is-invalid]="invalid(password)"
-                    [class.is-valid]="valid(password)" class="form-control"
-                    id="inputPassword">
+                <input type="password" formControlName="password" [class.is-invalid]="invalid(password)"
+                    [class.is-valid]="valid(password)" class="form-control" id="inputPassword">
                 <div *ngIf="password.errors?.['required']" class="invalid-feedback d-block">
                     Pole nie może być puste.
                 </div>

@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
+import { SharedModule } from '@app/shared/shared.module';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { ProductsComponent } from './products.component';
   ],
   imports: [
     CommonModule,
-    ProductsRoutingModule
+    ProductsRoutingModule,
+    CarouselModule,
+    SharedModule
   ]
 })
 export class ProductsModule { }

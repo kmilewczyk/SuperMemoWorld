@@ -24,9 +24,11 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('loginErrorModal') loginErrorModal!: TemplateRef<any>;
+
   modalRef?: BsModalRef;
   modalErrorMessage?: string;
-  @ViewChild('loginErrorModal') loginErrorModal!: TemplateRef<any>;
+  loginInProcess = false;
 
   loginForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -53,6 +55,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     const form = this.loginForm.value;
+    this.loginInProcess = true;
+
     this.auth.logIn(form.email, form.password, form.stayLoggedIn).subscribe(
       () => {
         this.router.navigate(['products']);
@@ -61,6 +65,9 @@ export class LoginComponent implements OnInit {
         console.log(error);
         this.modalErrorMessage = error.message;
         this.openModal();
+      },
+      () => {
+        this.loginInProcess = false;
       }
     );
   }
