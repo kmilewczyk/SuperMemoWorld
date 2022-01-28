@@ -1,15 +1,36 @@
-<h1 class="text-primary display-3">Koszyki użytkowników</h1>
-<accordion>
-    <accordion-group heading="Static Header">
-        This content is straight in the template.
-    </accordion-group>
-    <accordion-group heading="Another group">
-        <p>Some content</p>
-    </accordion-group>
-    <accordion-group heading="Another group">
-        <p>Some content</p>
-    </accordion-group>
-    <accordion-group heading="Another group">
-        <p>Some content</p>
+<h1 class="text-primary display-3 mb-4" style="font-weight: bold;">Koszyki użytkowników</h1>
+<accordion style="position: relative; min-height: 300px;">
+    <app-overlay *ngIf="loadingCarts"></app-overlay>
+    <accordion-group *ngFor="let cart of carts; let i = index" (isOpenChange)="onIsOpenChange(i)">
+        <div accordion-heading class="d-flex flex-row align-items-center p-2" style="justify-content: space-between;">
+            <h1>
+                {{ cart.user.firstname | titlecase }} {{ cart.user.lastname | titlecase }}
+            </h1>
+            <h5>{{ cart.date | date:'shortDate'}}</h5>
+        </div>
+
+        <!-- Content -->
+        <div class="p-3" style="position: relative; min-height: 10rem">
+            <div class="row">
+                <div *ngFor="let product of products(i)" class="card col-sm-4 col-lg-3" style="min-height: 100px;">
+                    <app-overlay *ngIf="!product"></app-overlay>
+                    <div *ngIf="product">
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <div class="card-body">
+                            <ul>
+                                <li>
+
+                                    Cena: {{ product.price }}
+                                </li>
+                                <li>
+                                    Liczba: {{ product.quantity }}
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </accordion-group>
 </accordion>

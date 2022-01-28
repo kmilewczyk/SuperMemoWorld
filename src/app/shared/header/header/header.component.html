@@ -13,8 +13,8 @@
 
             <!-- Offline mode toggle -->
             <button class="btn btn-primary" (click)="offlineModeToggle()"
-                [title]="(offlineMode$ | async) ? 'Disable offline mode' : 'Enable offline mode'"
-                [attr.aria-label]="(offlineMode$ | async) ? 'Disable offline mode' : 'Enable offline mode'">
+                [title]="(offlineMode$ | async) ? 'Pobieraj dane z FakeStoreApi' : 'Korzystaj z przykładowych danych'"
+                [attr.aria-label]="(offlineMode$ | async) ? 'Pobieraj dane z FakeStoreApi' : 'Korzystaj z przykładowych danych'">
                 <i [classList]="'h3 bi ' + ((offlineMode$ | async) ? 'bi-plug' : 'bi-plug-fill')"></i>
             </button>
         </div>

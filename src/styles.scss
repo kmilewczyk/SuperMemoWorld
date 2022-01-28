@@ -7,5 +7,9 @@ $enable-shadows: true;
 
 @import "~bootstrap-icons/font/bootstrap-icons.scss";
 
+.panel-body {
+    padding: 0;
+}
+
 /* Importing Datepicker SCSS file. */
 @import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker";

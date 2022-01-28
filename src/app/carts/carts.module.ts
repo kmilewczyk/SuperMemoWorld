@@ -4,6 +4,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion'
 
 import { CartsRoutingModule } from './carts-routing.module';
 import { CartsComponent } from './carts.component';
+import { SharedModule } from '@app/shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { CartsComponent } from './carts.component';
   imports: [
     CommonModule,
     CartsRoutingModule,
-    AccordionModule
+    AccordionModule,
+    SharedModule
   ]
 })
 export class CartsModule { }
