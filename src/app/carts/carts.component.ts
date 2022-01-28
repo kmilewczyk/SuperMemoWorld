@@ -20,7 +20,7 @@ export class CartsComponent implements OnInit {
     this.cartService.loadCarts().subscribe(carts => {
       this.carts = carts;
       this.loadingCarts = false;
-    });
+    }, error => { this.loadingCarts = false; });
   }
 
   onIsOpenChange(cartIndex: number) {

@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
     this.productService.getOverview(3).subscribe((overview) => {
       this.productOverview = overview;
       this.productLoading = false;
-    });
+    }, error => { this.productLoading; });
   }
 
   onSlideChange(slide: number) {

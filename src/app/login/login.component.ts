@@ -64,13 +64,12 @@ export class LoginComponent implements OnInit {
     this.auth.logIn(form.email, form.password, form.stayLoggedIn).subscribe(
       () => {
         this.router.navigate(['products']);
+        this.loginInProcess = false;
       },
       (error: LoginError) => {
         console.log(error);
         this.modalErrorMessage = error.message;
         this.openModal();
-      },
-      () => {
         this.loginInProcess = false;
       }
     );
