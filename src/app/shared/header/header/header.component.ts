@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
 
   onLogOut() {
     this.auth.logOut();
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 
   offlineModeToggle() {

@@ -4,7 +4,7 @@
     </div>
 
     <div style="position: relative; min-height: 550px; background-color: rgba(150, 150, 150, 0.1);"
-        class="px-5 py-2 card bg-dark text-white col-md-6 mx-auto">
+        class="px-5 py-2 card bg-dark text-white col-md-8 col-lg-6 mx-auto">
         <app-overlay *ngIf="productLoading"></app-overlay>
         <carousel [hidden]="productLoading" (activeSlideChange)="onSlideChange($event)" [interval]="0" class="p-0">
             <slide *ngFor="let product of productOverview">
